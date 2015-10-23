@@ -15,12 +15,12 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
  */
 public class GPIOReadExample {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 	    final GpioController gpio = GpioFactory.getInstance();
 	    
-	    final GpioPinDigitalInput trigger = gpio.provisionDigitalInputPin(RaspiPin.GPIO_06, PinPullResistance.PULL_UP);
-	    final GpioPinDigitalInput input =   gpio.provisionDigitalInputPin(RaspiPin.GPIO_07, PinPullResistance.PULL_UP);
+	    final GpioPinDigitalInput trigger = gpio.provisionDigitalInputPin(RaspiPin.GPIO_02, PinPullResistance.PULL_UP);
+	    final GpioPinDigitalInput input =   gpio.provisionDigitalInputPin(RaspiPin.GPIO_03, PinPullResistance.PULL_UP);
 		
 		trigger.addListener(new GpioPinListenerDigital(){
 
@@ -32,12 +32,15 @@ public class GPIOReadExample {
 				PinState state = input.getState();
 				
 				if (state == PinState.HIGH)
-					System.out.println("The state of pin 7 is high");
+					System.out.println("The state of pin " + input.getPin() + " is high");
 				else
-					System.out.println("The state of pin 7 is low");
+					System.out.println("The state of pin " + input.getPin() + " is low");
 			}
 			
 		});
-	    
+		
+		while (true){
+		    Thread.sleep(500);
+		}
 	}
 }
