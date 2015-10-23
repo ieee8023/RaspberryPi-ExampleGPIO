@@ -13,7 +13,7 @@ public class WalkTurtleDemo {
 
 	public static void main(String[] args) {
 
-		Util.makeStdDrawFullScreen();
+		//Util.makeStdDrawFullScreen();
 		
 		double x0 = 0.5;
 		double y0 = 0.5;
