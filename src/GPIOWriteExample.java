@@ -17,11 +17,11 @@ import com.pi4j.io.gpio.RaspiPin;
  */
 public class GPIOWriteExample {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 	    final GpioController gpio = GpioFactory.getInstance();
 	    
-	    final GpioPinDigitalOutput output = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_05, PinState.HIGH);
+	    final GpioPinDigitalOutput output = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.HIGH);
 
 		ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 		exec.scheduleAtFixedRate(new Runnable() {
