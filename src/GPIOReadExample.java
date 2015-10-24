@@ -17,30 +17,30 @@ public class GPIOReadExample {
 
 	public static void main(String[] args) throws Exception {
 		
-	    final GpioController gpio = GpioFactory.getInstance();
-	    
-	    final GpioPinDigitalInput trigger = gpio.provisionDigitalInputPin(RaspiPin.GPIO_02, PinPullResistance.PULL_UP);
-	    final GpioPinDigitalInput input =   gpio.provisionDigitalInputPin(RaspiPin.GPIO_03, PinPullResistance.PULL_UP);
-		
-		trigger.addListener(new GpioPinListenerDigital(){
-
-			@Override
-			public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
-				
-				System.out.println("GPIO pin 6 has been triggered!");
-				
-				PinState state = input.getState();
-				
-				if (state == PinState.HIGH)
-					System.out.println("The state of pin " + input.getPin() + " is high");
-				else
-					System.out.println("The state of pin " + input.getPin() + " is low");
-			}
+	final GpioController gpio = GpioFactory.getInstance();
+	
+	final GpioPinDigitalInput trigger = gpio.provisionDigitalInputPin(RaspiPin.GPIO_02, PinPullResistance.PULL_UP);
+	final GpioPinDigitalInput input =   gpio.provisionDigitalInputPin(RaspiPin.GPIO_03, PinPullResistance.PULL_UP);
+	
+	trigger.addListener(new GpioPinListenerDigital(){
+	
+		@Override
+		public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
 			
-		});
-		
-		while (true){
-		    Thread.sleep(500);
+			System.out.println("GPIO " + input.getPin() + " triggered!");
+			
+			PinState state = input.getState();
+			
+			if (state == PinState.HIGH)
+				System.out.println("Pin " + input.getPin() + " is high");
+			else
+				System.out.println("Pin " + input.getPin() + " is low");
 		}
+		
+	});
+	
+	while (true){
+	    Thread.sleep(500);
+	}
 	}
 }
