@@ -21,7 +21,7 @@ public class GPIOWriteExample {
 		
 	    final GpioController gpio = GpioFactory.getInstance();
 	    
-	    final GpioPinDigitalOutput output = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.HIGH);
+	    final GpioPinDigitalOutput output = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02);
 
 		ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 		exec.scheduleAtFixedRate(new Runnable() {
