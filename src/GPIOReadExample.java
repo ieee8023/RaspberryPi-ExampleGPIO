@@ -27,14 +27,14 @@ public class GPIOReadExample {
 		@Override
 		public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
 			
-			System.out.println("GPIO " + input.getPin() + " triggered!");
+			System.out.println(input.getPin() + " triggered!");
 			
 			PinState state = input.getState();
 			
 			if (state == PinState.HIGH)
-				System.out.println("Pin " + input.getPin() + " is high");
+				System.out.println(input.getPin() + " is high");
 			else
-				System.out.println("Pin " + input.getPin() + " is low");
+				System.out.println(input.getPin() + " is low");
 		}
 		
 	});
