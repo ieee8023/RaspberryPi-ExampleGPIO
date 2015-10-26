@@ -1,8 +1,13 @@
+import com.pi4j.component.switches.MomentarySwitch;
+import com.pi4j.component.switches.SwitchListener;
+import com.pi4j.component.switches.SwitchStateChangeEvent;
+import com.pi4j.component.switches.impl.GpioMomentarySwitchComponent;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
+import com.pi4j.io.gpio.RaspiBcmPin;
 import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
@@ -19,8 +24,21 @@ public class GPIOReadExample {
 		
 	final GpioController gpio = GpioFactory.getInstance();
 	
-	final GpioPinDigitalInput trigger = gpio.provisionDigitalInputPin(RaspiPin.GPIO_02, PinPullResistance.PULL_UP);
-	final GpioPinDigitalInput input =   gpio.provisionDigitalInputPin(RaspiPin.GPIO_03, PinPullResistance.PULL_UP);
+	final GpioPinDigitalInput trigger = gpio.provisionDigitalInputPin(RaspiPin.GPIO_08, PinPullResistance.PULL_DOWN);
+	final GpioPinDigitalInput input =   gpio.provisionDigitalInputPin(RaspiPin.GPIO_09, PinPullResistance.PULL_DOWN);
+	
+	MomentarySwitch ms = new GpioMomentarySwitchComponent(trigger);
+	
+	ms.addListener(new SwitchListener() {
+		
+		@Override
+		public void onStateChange(SwitchStateChangeEvent event) {
+			
+			System.out.println(trigger.getPin() + " MomentarySwitch triggered!");
+			
+		}
+	});
+	
 	
 	trigger.addListener(new GpioPinListenerDigital(){
 	
