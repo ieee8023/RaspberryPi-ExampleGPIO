@@ -4,7 +4,7 @@ import com.pi4j.component.switches.SwitchStateChangeEvent;
 import com.pi4j.component.switches.impl.GpioMomentarySwitchComponent;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
-import com.pi4j.io.gpio.GpioPinDigitalInput;
+import com.pi4j.io.gpio.GpioPinDigitalInput;import com.pi4j.io.gpio.PinMode;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiBcmPin;
@@ -24,8 +24,10 @@ public class GPIOReadExample {
 		
 	final GpioController gpio = GpioFactory.getInstance();
 	
-	final GpioPinDigitalInput trigger = gpio.provisionDigitalInputPin(RaspiPin.GPIO_08, PinPullResistance.PULL_DOWN);
-	final GpioPinDigitalInput input =   gpio.provisionDigitalInputPin(RaspiPin.GPIO_09, PinPullResistance.PULL_DOWN);
+	final GpioPinDigitalInput trigger = gpio.provisionDigitalInputPin(RaspiPin.GPIO_08, PinPullResistance.PULL_UP);
+	final GpioPinDigitalInput input =   gpio.provisionDigitalInputPin(RaspiPin.GPIO_09, PinPullResistance.PULL_UP);
+	
+	trigger.setDebounce(100);
 	
 	trigger.addListener(new GpioPinListenerDigital(){
 	
