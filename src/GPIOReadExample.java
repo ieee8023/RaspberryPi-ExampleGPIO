@@ -27,19 +27,6 @@ public class GPIOReadExample {
 	final GpioPinDigitalInput trigger = gpio.provisionDigitalInputPin(RaspiPin.GPIO_08, PinPullResistance.PULL_DOWN);
 	final GpioPinDigitalInput input =   gpio.provisionDigitalInputPin(RaspiPin.GPIO_09, PinPullResistance.PULL_DOWN);
 	
-	MomentarySwitch ms = new GpioMomentarySwitchComponent(trigger);
-	
-	ms.addListener(new SwitchListener() {
-		
-		@Override
-		public void onStateChange(SwitchStateChangeEvent event) {
-			
-			System.out.println(trigger.getPin() + " MomentarySwitch triggered!");
-			
-		}
-	});
-	
-	
 	trigger.addListener(new GpioPinListenerDigital(){
 	
 		@Override
