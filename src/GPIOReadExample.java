@@ -41,6 +41,8 @@ public class GPIOReadExample {
 			
 		});
 		
+		System.out.println("Listening on " + trigger.getPin());
+		
 		while (true) Thread.sleep(500);
 	
 	}

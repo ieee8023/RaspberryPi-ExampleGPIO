@@ -37,5 +37,7 @@ public class GPIOWriteExample {
 		}
 	}, 0, 100, TimeUnit.MILLISECONDS);
 	    
+	System.out.println("Writing to " + output.getPin());
+	
 	}
 }

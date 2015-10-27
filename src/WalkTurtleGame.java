@@ -42,13 +42,11 @@ public class WalkTurtleGame {
 				
 				if (true /*check if GPIO is 1*/)
 					rot = (rot + turn)%360;
-			    else
-			    	rot = 0;
+			    else rot = 0;
 					
 				if (true /*check if GPIO is 1*/)
 					spd += step;
-			    else
-			    	spd = 0;
+			    else spd = 0;
 					
 				System.out.println("rot=" + rot + ", spd=" + spd);
 				
