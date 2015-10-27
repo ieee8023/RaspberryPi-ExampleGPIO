@@ -1,6 +1,8 @@
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import com.pi4j.io.gpio.*;
+import com.pi4j.io.gpio.event.*;
 
 import sedgewick.Turtle;
 
@@ -17,12 +19,9 @@ public class WalkTurtleGame {
 
 		//Util.makeStdDrawFullScreen();
 		
-		double x0 = 0.5;
-		double y0 = 0.5;
-		double a0 = 0.0;
+		double x0 = 0.5, y0 = 0.5, a0 = 0.0;
 		final Turtle turtle = new Turtle(x0, y0, a0);
-		final double step = 0.002;
-		final double turn = 90;
+		final double step = 0.002, turn = 90;
 		
 		///////////////////////////////////////
 		// Configure GPIO pins here
@@ -32,29 +31,31 @@ public class WalkTurtleGame {
 		
 		ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 		exec.scheduleAtFixedRate(new Runnable() {
-
-			double rotation = 0;
-			double speed = 0;
-
+		
+			double rot = 0, spd = 0;
+		
 			@Override
 			public void run() {
-
+		
 				///////////////////////////////
 				// read GPIO pins and set new rotation and speed here
 				
 				if (true /*check if GPIO is 1*/)
-					rotation = (rotation + turn)%360;
+					rot = (rot + turn)%360;
+			    else
+			    	rot = 0;
 					
 				if (true /*check if GPIO is 1*/)
-					speed = speed + step;
+					spd += step;
+			    else
+			    	spd = 0;
 					
-				System.out.println("rotation=" + rotation + ", speed=" + speed);
+				System.out.println("rot=" + rot + ", spd=" + spd);
 				
-				turtle.goForward(speed);
-				turtle.turnLeft(rotation);
-
+				turtle.goForward(spd);
+				turtle.turnLeft(rot);
+		
 			}
 		}, 0, 500, TimeUnit.MILLISECONDS);
-		
 	}
 }

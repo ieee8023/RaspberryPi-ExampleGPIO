@@ -15,23 +15,22 @@ public class WalkTurtleDemo {
 
 		//Util.makeStdDrawFullScreen();
 		
-		double x0 = 0.5;
-		double y0 = 0.5;
-		double a0 = 0.0;
+		double x0 = 0.5, y0 = 0.5, a0 = 0.0;
+		
 		final Turtle turtle = new Turtle(x0, y0, a0);
 		
 		
 		ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 		exec.scheduleAtFixedRate(new Runnable() {
-
+		
 			double step = 0.002;
-
+		
 			@Override
 			public void run() {
-
+		
 				turtle.goForward(step += 0.02);
 				turtle.turnLeft(90);
-
+		
 			}
 		}, 0, 1, TimeUnit.SECONDS);
 		
